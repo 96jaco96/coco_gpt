@@ -38,7 +38,7 @@ And you can choose which personality the AI will have.
     ```
 ## Usage
 
-The program will give you the available commands when you run it, those sommands are:
+The program will give you the available commands when you run it, those commands are:
 
 ``` personality ```
 to set a new personalityfor the AI\
