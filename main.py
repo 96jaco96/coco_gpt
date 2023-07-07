@@ -10,6 +10,11 @@ from pygments.formatters import TerminalFormatter as formatter
 from colorama import Fore, Style
 from time import sleep
 from sys import stdout, exit
+# Use readline only if you're not on windows
+if os.name == 'nt': 
+    pass
+else: 
+    import readline
 
 config = configparser.ConfigParser()
 
@@ -126,13 +131,12 @@ while(True):
         start()
     # IF we already have a previous response we use it
     elif prev_query and prev_response:
-        # This is what we use as system role if there's a previous prompt and response
-        composed_query=system_role + "the previous query of the user was: " + prev_query + " and your response was: " + prev_response
+        composed_query = f"{system_role}the previous query of the user was: {prev_query} and your response was: {prev_response} "
         print(Fore.LIGHTGREEN_EX)
         stop_event = threading.Event()
-        loading_animation_thread = threading.Thread(target = loading_animation, args = (stop_event,))
+        loading_animation_thread = threading.Thread(target=loading_animation, args=(stop_event,))
         loading_animation_thread.start()
-        response=openai.ChatCompletion.create (model=model,messages=[{"role": "system", "content": composed_query},{"role": "user", "content": query}])
+        response = openai.ChatCompletion.create(model=model, messages=[{"role": "system", "content": composed_query},{"role": "user", "content": query}])
         stop_event.set()
         loading_animation_thread.join()
         print_response(response)
@@ -141,9 +145,9 @@ while(True):
     else:
         print(Fore.LIGHTGREEN_EX)
         stop_event = threading.Event()
-        loading_animation_thread = threading.Thread(target=loading_animation, args = (stop_event,))
+        loading_animation_thread = threading.Thread(target=loading_animation, args=(stop_event,))
         loading_animation_thread.start()
-        response=openai.ChatCompletion.create (model=model,messages=[{"role": "system", "content": system_role},{"role": "user", "content": query}])
+        response = openai.ChatCompletion.create(model=model, messages=[{"role": "system", "content": system_role},{"role": "user", "content": query}])
         stop_event.set()
         loading_animation_thread.join()
         print_response(response)

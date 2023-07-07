@@ -12,7 +12,8 @@ And you can choose which personality the AI will have.
 
 * Python >= 3.9.6
 
-#### NOTE: This was developed using Python 3.9.6, but was tested up to 3.11.2
+#### NOTE: This was developed using Python 3.9.6, but was tested up to 3.11.3
+#### ALSO: While this program is system agnostic it works best on Linux due to the library "readline"
   
 
 ### Installation
@@ -46,6 +47,8 @@ to set a new personalityfor the AI\
  to forget the previous query, response and personality\
 ```exit```
  to close the program
+
+#### NOTE: The config files uses GPT-4 by default
 
 ## Contributing
 
